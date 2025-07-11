@@ -14,6 +14,9 @@ type fs_bpf_memevents, fs_type, bpffs_type;
 # /data/misc/storaged
 type storaged_data_file, file_type, data_file_type, core_data_file_type;
 
+# /data/system/switchboard
+type switchboard_data_file, file_type, data_file_type, core_data_file_type;
+
 # /data/misc/wmtrace for wm traces
 type wm_trace_data_file, file_type, data_file_type, core_data_file_type, mlstrustedobject;
 

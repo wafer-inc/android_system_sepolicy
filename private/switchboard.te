@@ -1,0 +1,31 @@
+# switchboard service
+type switchboard, domain, coredomain, mlstrustedsubject;
+type switchboard_exec, exec_type, system_file_type, file_type;
+
+init_daemon_domain(switchboard)
+
+# Allow switchboard to read app data for indexing
+# Note: mlstrustedsubject was already declared in the type definition above
+
+# Allow switchboard to use binder (required for binder services)
+binder_use(switchboard)
+binder_service(switchboard)
+
+# Allow switchboard to create and access its data directory
+allow switchboard switchboard_data_file:dir create_dir_perms;
+allow switchboard switchboard_data_file:file create_file_perms;
+
+# Allow switchboard to register its service
+allow switchboard switchboard_service:service_manager add;
+
+# Allow system_server to find the switchboard service
+allow system_server switchboard_service:service_manager find;
+
+# Allow switchboard to make network connections
+allow switchboard self:udp_socket create_socket_perms;
+allow switchboard node:udp_socket node_bind;
+allow switchboard port:udp_socket name_bind;
+allow switchboard self:tcp_socket create_stream_socket_perms;
+
+# Allow switchboard to communicate with system apps via binder
+allow switchboard system_app:binder call;

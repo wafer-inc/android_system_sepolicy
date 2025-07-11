@@ -457,6 +457,7 @@ var (
 		"storaged":                               []string{"storaged_service_fuzzer"},
 		"storaged_pri":                           []string{"storaged_private_service_fuzzer"},
 		"storagestats":                           EXCEPTION_NO_FUZZER,
+		"switchboardservice":                     EXCEPTION_NO_FUZZER,
 		"sdk_sandbox":                            EXCEPTION_NO_FUZZER,
 		"SurfaceFlinger":                         EXCEPTION_NO_FUZZER,
 		"SurfaceFlingerAIDL":                     EXCEPTION_NO_FUZZER,

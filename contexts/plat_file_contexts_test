@@ -342,6 +342,7 @@
 /system/bin/app_process64                                         zygote_exec
 /system/bin/servicemanager                                        servicemanager_exec
 /system/bin/surfaceflinger                                        surfaceflinger_exec
+/system/bin/switchboard_server                                    switchboard_exec
 /system/bin/gpuservice                                            gpuservice_exec
 /system/bin/bufferhubd                                            bufferhubd_exec
 /system/bin/performanced                                          performanced_exec
@@ -843,6 +844,8 @@
 /data/system/environ                                              environ_system_data_file
 /data/system/environ/test                                         environ_system_data_file
 /data/system/packages.list                                        packages_list_file
+/data/system/switchboard                                          switchboard_data_file
+/data/system/switchboard/wafer.db                                 switchboard_data_file
 /data/system/game_mode_intervention.list                          game_mode_intervention_list_file
 /data/unencrypted                                                 unencrypted_data_file
 /data/unencrypted/test                                            unencrypted_data_file
