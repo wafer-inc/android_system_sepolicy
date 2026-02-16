@@ -1,0 +1,76 @@
+# Switchboard service
+type switchboard, domain, coredomain, mlstrustedsubject;
+type switchboard_exec, system_file_type, exec_type, file_type;
+
+init_daemon_domain(switchboard)
+
+# Read/write own data directory
+allow switchboard switchboard_data_file:dir create_dir_perms;
+allow switchboard switchboard_data_file:file create_file_perms;
+
+# Run as root - need DAC bypass to read app data (/data/data/*)
+allow switchboard self:global_capability_class_set { dac_override dac_read_search };
+
+# Traverse /data to reach app data directories
+allow switchboard system_data_file:dir { search read open };
+allow switchboard system_userdir_file:dir { search read open };
+
+# Read app databases for ingestion (write needed for SQLite WAL/SHM)
+allow switchboard app_data_file:dir { read getattr search open };
+allow switchboard app_data_file:file { read write getattr setattr map ioctl lock open };
+allow switchboard privapp_data_file:dir { read getattr search open };
+allow switchboard privapp_data_file:file { read write getattr setattr map ioctl lock open };
+allow switchboard system_app_data_file:dir { read getattr search open };
+allow switchboard system_app_data_file:file { read write getattr setattr map ioctl lock open };
+
+# Read storage for ingestion
+allow switchboard media_rw_data_file:dir r_dir_perms;
+allow switchboard media_rw_data_file:file r_file_perms;
+
+# Binder
+binder_use(switchboard)
+add_service(switchboard, switchboard_service)
+binder_call(switchboard, system_server)
+binder_call(system_server, switchboard)
+
+# Allow WaferLauncher (system_app) to call us and vice versa
+binder_call(switchboard, system_app)
+binder_call(system_app, switchboard)
+
+# Allow system_app (WaferLauncher) and system_server to find our service
+allow system_app switchboard_service:service_manager find;
+allow system_server switchboard_service:service_manager find;
+
+# PipController service registered by WaferLauncher (system_app)
+allow system_app pip_controller_service:service_manager { add find };
+allow switchboard pip_controller_service:service_manager find;
+
+# ShortcutService native interface for share shortcuts (device actions)
+allow switchboard shortcut_service:service_manager find;
+
+# Network access for LLM API calls
+net_domain(switchboard)
+
+# Execute am/cmd (system_file) to launch intents, and Operator java_binary wrapper
+allow switchboard system_file:file { read open execute execute_no_trans map getattr };
+allow switchboard shell_exec:file { read open execute execute_no_trans map getattr };
+allow switchboard switchboard_operator_exec:file { read open execute execute_no_trans map getattr };
+
+# am start needs to talk to activity service
+allow switchboard activity_service:service_manager find;
+# am/cmd (system_server) writes output back through switchboard's pipe
+allow system_server switchboard:fifo_file write;
+
+# Operator wrapper needs app_process
+allow switchboard zygote_exec:file { read open execute map getattr };
+
+# Device state: power state, battery
+allow switchboard sysfs_power:file r_file_perms;
+allow switchboard sysfs_batteryinfo:dir search;
+dontaudit switchboard sysfs_batteryinfo:file read;
+
+# Dumpsys support
+allow switchboard shell:fd use;
+allow switchboard shell:fifo_file write;
+allow switchboard dumpstate:fd use;
+allow switchboard dumpstate:fifo_file write;

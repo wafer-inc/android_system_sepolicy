@@ -432,6 +432,8 @@
 /system/bin/profcollectd                                          profcollectd_exec
 /system/bin/profcollectctl                                        profcollectd_exec
 /system/bin/storaged                                              storaged_exec
+/system/bin/switchboard_server                                    switchboard_exec
+/system/bin/Operator                                              switchboard_operator_exec
 /system/bin/virtual_camera                                        virtual_camera_exec
 /system/bin/virtual_touchpad                                      virtual_touchpad_exec
 /system/bin/hw/android.frameworks.bufferhub@1.0-service           fwk_bufferhub_exec
@@ -1057,6 +1059,8 @@
 /data/misc/sms/test                                               radio_data_file
 /data/misc/snapshotctl_log                                        snapshotctl_log_data_file
 /data/misc/snapshotctl_log/test                                   snapshotctl_log_data_file
+/data/misc/switchboard                                            switchboard_data_file
+/data/misc/switchboard/test                                       switchboard_data_file
 /data/misc/stats-active-metric                                    stats_data_file
 /data/misc/stats-active-metric/test                               stats_data_file
 /data/misc/stats-data                                             stats_data_file

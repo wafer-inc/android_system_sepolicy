@@ -435,6 +435,7 @@ servicediscovery                          u:object_r:servicediscovery_service:s0
 manager                                   u:object_r:service_manager_service:s0
 settings                                  u:object_r:settings_service:s0
 shortcut                                  u:object_r:shortcut_service:s0
+shortcut_native                           u:object_r:shortcut_service:s0
 simphonebook_msim                         u:object_r:radio_service:s0
 simphonebook2                             u:object_r:radio_service:s0
 simphonebook                              u:object_r:radio_service:s0
@@ -522,4 +523,7 @@ starting_at_board_api(202504, `
 ')
 wifi_mainline_supplicant                  u:object_r:wifi_mainline_supplicant_service:s0
 window                                    u:object_r:window_service:s0
+switchboardservice                        u:object_r:switchboard_service:s0
+pip_controller                            u:object_r:pip_controller_service:s0
+wafer_accessibility                       u:object_r:pip_controller_service:s0
 *                                         u:object_r:default_android_service:s0
