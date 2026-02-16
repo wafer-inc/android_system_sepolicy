@@ -1750,6 +1750,7 @@ neverallow {
   -profman
   -rs # spawned by appdomain, so carryover the exception above
   -runas
+  -switchboard
   -system_server
   -zygote
 } {
@@ -1817,6 +1818,7 @@ neverallow {
   -artd # compile secondary dex files
   -installd
   -rs # spawned by appdomain, so carryover the exception above
+  -switchboard
 } {
   privapp_data_file
   app_data_file
@@ -2028,6 +2030,7 @@ define(`dac_override_allowed', `{
   zygote
   zygote_next
   userdebug_or_eng(`overlay_remounter')
+  switchboard
 }')
 neverallow ~dac_override_allowed self:global_capability_class_set dac_override;
 # Since the kernel checks dac_read_search before dac_override, domains that
@@ -2306,6 +2309,7 @@ neverallow {
   -traced_probes # resolve inodes for i/o tracing.
                  # only needs open and read, the rest is neverallow in
                  # traced_probes.te.
+  -switchboard
 } system_app_data_file:dir_file_class_set { create unlink open };
 neverallow {
   isolated_app_all

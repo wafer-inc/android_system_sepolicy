@@ -73,6 +73,8 @@ type theme_service,                     system_server_service, service_manager_t
 until_board_api(202604, `
 type hal_bluetooth_lpp_service, protected_service, hal_service_type, service_manager_type;
 ')
+type switchboard_service, service_manager_type;
+type pip_controller_service, service_manager_type;
 
 ###
 ### Neverallow rules

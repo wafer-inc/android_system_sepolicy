@@ -949,6 +949,11 @@
 # mount point for read-write product partitions
 /mnt/product(/.*)?          u:object_r:mnt_product_file:s0
 
+# Switchboard
+/system/bin/switchboard_server    u:object_r:switchboard_exec:s0
+/system/bin/Operator              u:object_r:switchboard_operator_exec:s0
+/data/misc/switchboard(/.*)?      u:object_r:switchboard_data_file:s0
+
 #############################
 # /postinstall file contexts
 /(system|product)/bin/check_dynamic_partitions  u:object_r:postinstall_exec:s0
