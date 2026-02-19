@@ -56,8 +56,13 @@
       <seinfo value="sdk_sandbox" />
     </signer>
 
-    <!-- Bluetooth key in AOSP -->
+    <!-- Bluetooth key -->
     <signer signature="@BLUETOOTH" >
+      <seinfo value="bluetooth" />
+    </signer>
+
+    <!-- Original AOSP Bluetooth key (for devices upgrading from old cert) -->
+    <signer signature="@BLUETOOTH_ORIGINAL" >
       <seinfo value="bluetooth" />
     </signer>
 
