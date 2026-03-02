@@ -64,6 +64,9 @@ allow system_server switchboard:fifo_file write;
 # Operator wrapper needs app_process
 allow switchboard zygote_exec:file { read open execute map getattr };
 
+# Perf logging: read /proc/meminfo for available memory
+allow switchboard proc_meminfo:file r_file_perms;
+
 # Device state: power state, battery
 allow switchboard sysfs_power:file r_file_perms;
 allow switchboard sysfs_batteryinfo:dir search;
