@@ -178,6 +178,10 @@ get_prop(system_app, usb_uvc_enabled_prop)
 allow system_app connectivityblob_data_file:dir rw_dir_perms;
 allow system_app connectivityblob_data_file:file create_file_perms;
 
+# Allow system_app (WaferLauncher) to download OTA packages
+allow system_app ota_package_file:dir rw_dir_perms;
+allow system_app ota_package_file:file create_file_perms;
+
 ###
 ### Neverallow rules
 ###
