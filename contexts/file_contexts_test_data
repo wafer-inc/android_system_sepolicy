@@ -877,6 +877,8 @@
 /data/dalvik-cache/test                                           dalvikcache_data_file
 /data/ota_package                                                 ota_package_file
 /data/ota_package/test                                            ota_package_file
+/data/pathos_updates                                              ota_package_file
+/data/pathos_updates/test                                         ota_package_file
 /data/adb                                                         adb_data_file
 /data/adb/test                                                    adb_data_file
 /data/anr                                                         anr_data_file
