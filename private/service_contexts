@@ -524,6 +524,7 @@ starting_at_board_api(202504, `
 wifi_mainline_supplicant                  u:object_r:wifi_mainline_supplicant_service:s0
 window                                    u:object_r:window_service:s0
 switchboardservice                        u:object_r:switchboard_service:s0
+contacts_importer                         u:object_r:pip_controller_service:s0
 pip_controller                            u:object_r:pip_controller_service:s0
 wafer_accessibility                       u:object_r:pip_controller_service:s0
 *                                         u:object_r:default_android_service:s0
