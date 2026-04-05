@@ -72,6 +72,19 @@ allow switchboard sysfs_power:file r_file_perms;
 allow switchboard sysfs_batteryinfo:dir search;
 dontaudit switchboard sysfs_batteryinfo:file read;
 
+# iPhone transfer: USB host mode + usbmuxd
+# Switch USB-C port to host mode for iPhone communication
+allow switchboard sysfs_batteryinfo:file { write open getattr };
+# usbmuxd needs to create/use a unix domain socket and manage its pid file
+allow switchboard switchboard_data_file:sock_file { create write read unlink getattr setattr };
+# usbmuxd needs sys_resource for setrlimit (raises fd limit)
+allow switchboard self:global_capability_class_set sys_resource;
+# usbmuxd scans sysfs for USB devices
+allow switchboard sysfs:dir r_dir_perms;
+# usbmuxd accesses USB devices via /dev/bus/usb/
+allow switchboard usb_device:dir r_dir_perms;
+allow switchboard usb_device:chr_file { read write open ioctl getattr };
+
 # Dumpsys support
 allow switchboard shell:fd use;
 allow switchboard shell:fifo_file write;

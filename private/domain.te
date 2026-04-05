@@ -1633,6 +1633,8 @@ full_treble_only(`
     -charger
     # TODO(b/110891300): remove this exception
     -incidentd
+    # Switch USB-C to host mode for iPhone data transfer
+    -switchboard
   } sysfs_batteryinfo:file { open read };
 ')
 
