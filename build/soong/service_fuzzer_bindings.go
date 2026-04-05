@@ -459,6 +459,7 @@ var (
 		"storaged_pri":                           []string{"storaged_private_service_fuzzer"},
 		"storagestats":                           EXCEPTION_NO_FUZZER,
 		"switchboardservice":                     EXCEPTION_NO_FUZZER,
+		"contacts_importer":                      EXCEPTION_NO_FUZZER,
 		"pip_controller":                         EXCEPTION_NO_FUZZER,
 		"wafer_accessibility":                    EXCEPTION_NO_FUZZER,
 		"sdk_sandbox":                            EXCEPTION_NO_FUZZER,
