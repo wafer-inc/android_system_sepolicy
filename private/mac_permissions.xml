@@ -74,4 +74,9 @@
     <signer signature="@NFC" >
       <seinfo value="nfc" />
     </signer>
+
+    <!-- Google's platform signing key (for presigned APKs like PixelCamera) -->
+    <signer signature="@GOOGLE" >
+      <seinfo value="google" />
+    </signer>
 </policy>
