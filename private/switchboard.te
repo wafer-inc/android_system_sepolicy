@@ -36,6 +36,8 @@ binder_call(system_server, switchboard)
 # Allow WaferLauncher (system_app) to call us and vice versa
 binder_call(switchboard, system_app)
 binder_call(system_app, switchboard)
+# WaferLauncher passes screenshot data via a pipe FD in the binder call
+allow switchboard system_app:fifo_file read;
 
 # Allow system_app (WaferLauncher) and system_server to find our service
 allow system_app switchboard_service:service_manager find;
