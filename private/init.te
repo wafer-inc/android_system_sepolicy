@@ -911,12 +911,4 @@ allow init ota_package_file:dir create_dir_perms;
 allow init system_data_file:dir relabelfrom;
 allow init ota_package_file:dir relabelto;
 
-# EdgeTPU mitigation: bypass the cloud-allowlist signature check that crashes
-# the service when GMS isn't available (Camera HDR+ etc.). The vendor
-# partition is a prebuilt blob, so vendor.edgetpu.service.* properties can't
-# be added to vendor/build.prop. Instead we set the prop from a wafer init.rc
-# on the system_ext side (see vendor/google_devices/komodo/wafer/edgetpu.rc).
-# The vendor_edgetpu_service_prop type itself is declared by the adevtool-
-# generated vendor sepolicy.
-set_prop(init, vendor_edgetpu_service_prop)
 # ============================================================
