@@ -897,3 +897,26 @@ neverallow { domain -init } keystore_listen_prop:property_service set;
 
 # Only init can set ro.init.mnt_ns.count
 neverallow { domain -init } init_mnt_ns_prop:property_service set;
+
+# ============================================================
+# Wafer additions (Phase 4 migration from device/google/caimito-sepolicy and
+# device/google/gs-common, both of which were retired on A16 in favor of
+# adevtool-generated vendor modules).
+# ============================================================
+
+# SwitchboardUpdater stages OTA payloads under /data/pathos_updates/. The
+# file_contexts entry is in private/file_contexts; init still needs the
+# permissions to actually create and label the directory at first boot.
+allow init ota_package_file:dir create_dir_perms;
+allow init system_data_file:dir relabelfrom;
+allow init ota_package_file:dir relabelto;
+
+# EdgeTPU mitigation: bypass the cloud-allowlist signature check that crashes
+# the service when GMS isn't available (Camera HDR+ etc.). The vendor
+# partition is a prebuilt blob, so vendor.edgetpu.service.* properties can't
+# be added to vendor/build.prop. Instead we set the prop from a wafer init.rc
+# on the system_ext side (see vendor/google_devices/komodo/wafer/edgetpu.rc).
+# The vendor_edgetpu_service_prop type itself is declared by the adevtool-
+# generated vendor sepolicy.
+set_prop(init, vendor_edgetpu_service_prop)
+# ============================================================
