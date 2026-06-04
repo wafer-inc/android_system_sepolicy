@@ -462,6 +462,7 @@ var (
 		"wafer_backdrop":                         EXCEPTION_NO_FUZZER,
 		"contacts_importer":                      EXCEPTION_NO_FUZZER,
 		"pip_controller":                         EXCEPTION_NO_FUZZER,
+		"sms_importer":                           EXCEPTION_NO_FUZZER,
 		"wafer_accessibility":                    EXCEPTION_NO_FUZZER,
 		"sdk_sandbox":                            EXCEPTION_NO_FUZZER,
 		"SurfaceFlinger":                         EXCEPTION_NO_FUZZER,

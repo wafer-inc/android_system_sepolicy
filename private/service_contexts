@@ -527,5 +527,6 @@ window                                    u:object_r:window_service:s0
 switchboardservice                        u:object_r:switchboard_service:s0
 contacts_importer                         u:object_r:pip_controller_service:s0
 pip_controller                            u:object_r:pip_controller_service:s0
+sms_importer                              u:object_r:pip_controller_service:s0
 wafer_accessibility                       u:object_r:pip_controller_service:s0
 *                                         u:object_r:default_android_service:s0
