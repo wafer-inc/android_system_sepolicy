@@ -66,6 +66,13 @@ allow system_server switchboard:fifo_file write;
 # Operator wrapper needs app_process
 allow switchboard zygote_exec:file { read open execute map getattr };
 
+# Analytics device identity: read the hardware serial
+# (getprop ro.serialno / ro.boot.serialno — used as the PostHog distinct_id)
+get_prop(switchboard, serialno_prop)
+# ...and `settings get secure android_id` (`cmd settings` needs to find the
+# settings service; the binder_call to system_server is granted above)
+allow switchboard settings_service:service_manager find;
+
 # Perf logging: read /proc/meminfo for available memory
 allow switchboard proc_meminfo:file r_file_perms;
 

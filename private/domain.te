@@ -829,6 +829,7 @@ neverallow {
   -mediaserver
   -recovery
   -shell
+  -switchboard # Wafer: hardware serial is the analytics device id
   -system_server
   -vendor_init
 } serialno_prop:file r_file_perms;
