@@ -52,6 +52,14 @@ allow switchboard system_app:fifo_file read;
 allow system_app switchboard_service:service_manager find;
 allow system_server switchboard_service:service_manager find;
 
+# WebViewRenderer (platform-signed app UID, domain platform_app): it finds our
+# service and pushes its renderer binder to us — inverted registration, since
+# app UIDs can't add to ServiceManager and system-UID processes can't host a
+# WebView — and we call back into it to render JS-heavy pages for web_fetch.
+allow platform_app switchboard_service:service_manager find;
+binder_call(platform_app, switchboard)
+binder_call(switchboard, platform_app)
+
 # PipController service registered by WaferLauncher (system_app)
 allow system_app pip_controller_service:service_manager { add find };
 allow switchboard pip_controller_service:service_manager find;
