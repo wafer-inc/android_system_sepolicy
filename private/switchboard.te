@@ -59,6 +59,9 @@ allow system_server switchboard_service:service_manager find;
 allow platform_app switchboard_service:service_manager find;
 binder_call(platform_app, switchboard)
 binder_call(switchboard, platform_app)
+# Rendered HTML comes back through a pipe FD (SPA DOMs exceed the 1MB binder
+# transaction limit), same pattern as the launcher's screenshot pipe above.
+allow switchboard platform_app:fifo_file read;
 
 # PipController service registered by WaferLauncher (system_app)
 allow system_app pip_controller_service:service_manager { add find };
