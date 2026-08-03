@@ -43,6 +43,19 @@ allow switchboard system_app:fifo_file read;
 allow system_app switchboard_service:service_manager find;
 allow system_server switchboard_service:service_manager find;
 
+# WebViewRenderer (com.wafer.webviewrenderer) renders JS-heavy pages for
+# web_fetch. It is platform-signed but declares no sharedUserId, so it runs as
+# platform_app rather than system_app — a WebView host must not hold the system
+# UID, and the UIDs that may add a ServiceManager entry may not host a WebView.
+# Registration is therefore inverted: the app finds us and pushes its
+# IWebViewRenderer over ISwitchboardService::registerWebViewRenderer, so it
+# needs `find` on our service. Rendered DOMs routinely exceed the 1MB binder
+# limit and come back over a pipe FD, hence the fifo_file read.
+allow platform_app switchboard_service:service_manager find;
+binder_call(switchboard, platform_app)
+binder_call(platform_app, switchboard)
+allow switchboard platform_app:fifo_file read;
+
 # PipController service registered by WaferLauncher (system_app)
 allow system_app pip_controller_service:service_manager { add find };
 allow switchboard pip_controller_service:service_manager find;
