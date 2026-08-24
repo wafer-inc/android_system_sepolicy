@@ -27,6 +27,12 @@ allow switchboard system_app_data_file:file { read write getattr setattr map ioc
 allow switchboard media_rw_data_file:dir r_dir_perms;
 allow switchboard media_rw_data_file:file r_file_perms;
 
+# Read the telephony provider's databases and MMS part files for
+# Messages-attachment ingestion. Read-only: attachment bytes are hashed and
+# thumbnailed into wafer.db, never modified in place.
+allow switchboard radio_data_file:dir r_dir_perms;
+allow switchboard radio_data_file:file r_file_perms;
+
 # Binder
 binder_use(switchboard)
 add_service(switchboard, switchboard_service)
