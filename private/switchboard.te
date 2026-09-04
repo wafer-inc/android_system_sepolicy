@@ -59,6 +59,19 @@ allow switchboard pip_controller_service:service_manager find;
 # ShortcutService native interface for share shortcuts (device actions)
 allow switchboard shortcut_service:service_manager find;
 
+# HEIF decoding. AImageDecoder hands HEIC files to the platform's
+# HeifDecoderImpl, which runs the extractor and codec out of process:
+# it looks up media.player, talks to mediaserver over binder, and the
+# extractor calls back into our data source (fd + binder). Without these
+# every HEIC thumbnail (and so every HEIC embed and face scan) fails with
+# "HeifDecoderImpl: failed to set data source". JPEG/PNG/WebP decode
+# in-process and never needed them.
+allow switchboard mediaserver_service:service_manager find;
+binder_call(switchboard, mediaserver)
+binder_call(mediaserver, switchboard)
+binder_call(switchboard, mediaextractor)
+binder_call(mediaextractor, switchboard)
+
 # Network access for LLM API calls
 net_domain(switchboard)
 
